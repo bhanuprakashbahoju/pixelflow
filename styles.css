@@ -204,12 +204,17 @@ a { color: inherit; text-decoration: none; cursor: none; }
     font-weight: 500;
     letter-spacing: -0.02em;
     z-index: 98;
-    transform: translateY(-100%);
-    transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+    transform: translateY(-8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 320ms cubic-bezier(.2,.8,.2,1), opacity 280ms, visibility 0ms 320ms;
     pointer-events: none;
   }
   .nav-links.is-open {
     transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transition: transform 380ms cubic-bezier(.2,.8,.2,1), opacity 300ms, visibility 0ms;
     pointer-events: auto;
   }
   .nav-links a { color: var(--ink); padding: 4px 0; }
