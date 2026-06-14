@@ -61,6 +61,11 @@ function Nav() {
         <a href="#services" onClick={close}>Services</a>
         <a href="#process" onClick={close}>Process</a>
         <a href="#studio" onClick={close}>Studio</a>
+        <button className="nav-close-btn" onClick={close} aria-label="Close menu">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M2 2L16 16M16 2L2 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+          </svg>
+        </button>
       </div>
       <div className="nav-right">
         <a href="#contact" className="nav-cta" onClick={close}>

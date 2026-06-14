@@ -10,7 +10,8 @@ function useReveal(threshold = 0.15) {
     const el = ref.current;
     const io = new IntersectionObserver(
       ([e]) => {
-        if (e.isIntersecting) {
+        // Skip IO callbacks while menu scroll-lock is active to prevent false reveals
+        if (e.isIntersecting && !document.body.dataset.scrollY) {
           setShown(true);
           io.disconnect();
         }
