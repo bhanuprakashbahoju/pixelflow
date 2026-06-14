@@ -155,7 +155,8 @@ a { color: inherit; text-decoration: none; cursor: none; }
   transition: right 280ms cubic-bezier(.2,.8,.2,1);
 }
 .nav-links a:hover::after { right: 0; }
-@media (max-width: 720px) { .nav-links { display: none; } }
+
+.nav-right { display: flex; align-items: center; gap: 12px; }
 
 .nav-cta {
   display: inline-flex; align-items: center; gap: 10px;
@@ -168,6 +169,54 @@ a { color: inherit; text-decoration: none; cursor: none; }
 .nav-cta:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
 .nav-cta .arrow { transition: transform 220ms cubic-bezier(.2,.8,.2,1); }
 .nav-cta:hover .arrow { transform: translateX(2px); }
+
+/* Hamburger button */
+.nav-menu-btn {
+  display: none;
+  width: 38px; height: 38px;
+  align-items: center; justify-content: center;
+  border: 1px solid var(--rule-strong);
+  border-radius: 10px;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.ham { display: flex; flex-direction: column; gap: 5px; width: 16px; }
+.ham i {
+  display: block; height: 1.5px; border-radius: 2px;
+  background: var(--ink);
+  transition: transform 320ms cubic-bezier(.2,.8,.2,1), opacity 200ms;
+}
+.ham.is-open i:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.ham.is-open i:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.ham.is-open i:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 720px) {
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    z-index: 98;
+    transform: translateY(-100%);
+    transition: transform 420ms cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+  }
+  .nav-links.is-open {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .nav-links a { color: var(--ink); padding: 4px 0; }
+  .nav-links a::after { display: none; }
+  .nav-menu-btn { display: flex; }
+  .nav-cta .nav-cta-label { display: none; }
+}
 
 /* ----------  Hero ---------- */
 .hero {
@@ -802,4 +851,66 @@ footer {
   display: inline-block;
   width: 1em; height: 1em;
   vertical-align: middle;
+}
+
+/* ----------  Mobile / Responsive ---------- */
+
+/* Only allow hover-expand on devices that support hover */
+@media (hover: none) {
+  .svc-row:hover { padding: 36px 0; }
+  .cap:hover { transform: none; }
+}
+
+/* Tablet */
+@media (max-width: 880px) {
+  .section { padding: 80px var(--hpad); }
+  .hero { padding: 120px var(--hpad) 60px; }
+  .contact { padding: 100px var(--hpad); }
+  .step:last-child { border-bottom: 0; }
+  .cap { min-height: 200px; }
+  .cap-12 .cap-viz { min-height: 180px; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .section { padding: 60px var(--hpad); }
+  .section-head { gap: 16px; padding-bottom: 24px; margin-bottom: 24px; }
+  .section-head .desc { font-size: 15px; }
+
+  .hero { padding: 96px var(--hpad) 48px; }
+  .hero-meta { padding-bottom: 24px; }
+  .hero-sub { margin-top: 40px; gap: 32px; }
+  .cta { --size: 120px; }
+
+  .contact { padding: 72px var(--hpad); }
+  .contact h2 { font-size: clamp(36px, 13vw, 56px); }
+  .contact .email { font-size: clamp(14px, 4.5vw, 22px); margin-top: 32px; }
+
+  .cap { min-height: 160px; padding: 20px; }
+  .cap h3 { font-size: 18px; }
+  .cap-12 { min-height: 0; }
+  .cap-12 .cap-viz { min-height: 160px; }
+  .cap-grid { gap: 12px; }
+
+  .london-meta { grid-template-columns: 1fr; gap: 20px; }
+  .map { min-height: 240px; }
+
+  .foot { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .foot > div:first-child { grid-column: span 2; }
+  .foot-base { flex-direction: column; gap: 6px; }
+
+  .process { gap: 0; }
+  .step { padding: 28px 0; }
+  .step h4 { font-size: 18px; }
+
+  .scroll-cue { display: none; }
+  .marquee { padding: 18px 0; }
+}
+
+/* Very small mobile */
+@media (max-width: 400px) {
+  .hero h1 { font-size: clamp(38px, 11vw, 56px); }
+  .nav-cta { padding: 8px 12px; font-size: 12px; gap: 6px; }
+  .foot { grid-template-columns: 1fr; }
+  .foot > div:first-child { grid-column: span 1; }
 }

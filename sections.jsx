@@ -18,30 +18,48 @@ function BrandMark() {
 // ---------- Nav ----------
 function Nav() {
   const [scrolled, setScrolled] = uS(false);
+  const [menuOpen, setMenuOpen] = uS(false);
+
   uE(() => {
     const on = () => setScrolled(window.scrollY > 32);
     on();
     window.addEventListener("scroll", on, { passive: true });
     return () => window.removeEventListener("scroll", on);
   }, []);
+
+  // Lock body scroll when menu open
+  uE(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
+
   return (
     <nav className={`nav ${scrolled ? "is-scrolled" : ""}`}>
-      <a href="#top" className="brand">
+      <a href="#top" className="brand" onClick={close}>
         <BrandMark />
         <span className="name">PixelFlow<em> ⁄ Solutions</em></span>
       </a>
-      <div className="nav-links">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#process">Process</a>
-        <a href="#studio">Studio</a>
+      <div className={`nav-links ${menuOpen ? "is-open" : ""}`}>
+        <a href="#work" onClick={close}>Work</a>
+        <a href="#services" onClick={close}>Services</a>
+        <a href="#process" onClick={close}>Process</a>
+        <a href="#studio" onClick={close}>Studio</a>
       </div>
-      <a href="#contact" className="nav-cta">
-        Start a project
-        <svg className="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <path d="M2 6H10M10 6L6 2M10 6L6 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-        </svg>
-      </a>
+      <div className="nav-right">
+        <a href="#contact" className="nav-cta" onClick={close}>
+          <span className="nav-cta-label">Start a project</span>
+          <svg className="arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M2 6H10M10 6L6 2M10 6L6 10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          </svg>
+        </a>
+        <button className="nav-menu-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+          <span className={`ham ${menuOpen ? "is-open" : ""}`}>
+            <i /><i /><i />
+          </span>
+        </button>
+      </div>
     </nav>
   );
 }
