@@ -22,10 +22,30 @@ function Nav() {
     return () => window.removeEventListener("scroll", on);
   }, []);
 
-  // Lock body scroll when menu open
+  // Lock body scroll when menu open (iOS-safe: position:fixed trick)
   uE(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (menuOpen) {
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = "100%";
+      document.body.dataset.scrollY = scrollY;
+    } else {
+      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      delete document.body.dataset.scrollY;
+      window.scrollTo(0, scrollY);
+    }
+    return () => {
+      const scrollY = parseInt(document.body.dataset.scrollY || "0", 10);
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      delete document.body.dataset.scrollY;
+      if (scrollY) window.scrollTo(0, scrollY);
+    };
   }, [menuOpen]);
 
   const close = () => setMenuOpen(false);
