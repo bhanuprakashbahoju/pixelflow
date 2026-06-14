@@ -120,7 +120,7 @@ a { color: inherit; text-decoration: none; cursor: none; }
   padding-top: 14px; padding-bottom: 14px;
 }
 .brand {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; gap: 2px;
   font-weight: 600; letter-spacing: -0.01em;
 }
 .brand .mark {
@@ -132,8 +132,8 @@ a { color: inherit; text-decoration: none; cursor: none; }
   width: 44px; height: 44px;
   object-fit: contain;
   display: block;
-  /* push slightly to compensate for transparent padding in the image */
-  scale: 1.35;
+  scale: 1.7;
+  translate: 6px 0;
 }
 .brand .name { font-size: 15px; }
 .brand .name em {
