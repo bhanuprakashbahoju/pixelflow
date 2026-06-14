@@ -124,12 +124,12 @@ a { color: inherit; text-decoration: none; cursor: none; }
   font-weight: 600; letter-spacing: -0.01em;
 }
 .brand .mark {
-  width: 36px; height: 36px;
+  width: 52px; height: 52px;
   display: grid; place-items: center;
   position: relative;
 }
 .brand-logo {
-  width: 36px; height: 36px;
+  width: 52px; height: 52px;
   object-fit: contain;
   display: block;
 }
