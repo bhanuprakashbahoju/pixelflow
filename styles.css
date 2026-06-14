@@ -871,6 +871,20 @@ footer {
   .cap-12 .cap-viz { min-height: 180px; }
 }
 
+/* Always-on nav background on mobile so content never bleeds through */
+@media (max-width: 720px) {
+  .nav {
+    background: var(--bg);
+    border-bottom-color: var(--rule);
+  }
+  /* Corner tag: pull out of absolute flow, show inline above the title */
+  .cap .corner {
+    position: static;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+}
+
 /* Mobile */
 @media (max-width: 640px) {
   .section { padding: 60px var(--hpad); }
